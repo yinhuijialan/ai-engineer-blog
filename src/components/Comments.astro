@@ -1,0 +1,46 @@
+---
+// Giscus 评论组件（基于 GitHub Discussions，零后端、免费）
+//
+// 启用步骤：
+// 1. 打开 https://giscus.app/zh-CN ，按引导安装 Giscus App 到你的仓库
+// 2. 仓库需为 public 且开启 Discussions
+// 3. 把下方 giscus 对象里的 repo / repoId / category / categoryId 换成你自己的值
+//    （这些值在 giscus.app 页面底部会自动生成）
+// 4. 到 src/layouts/BlogPost.astro 底部，取消注释 <Comments />
+const giscus = {
+  repo: 'YOUR_USERNAME/YOUR_REPO',        // 例如：astrofun/blog
+  repoId: 'YOUR_REPO_ID',                  // giscus.app 生成
+  category: 'Announcements',               // 你在仓库里建的 Discussion 分类名
+  categoryId: 'YOUR_CATEGORY_ID',          // giscus.app 生成
+};
+const enabled = giscus.repo.startsWith('YOUR_') === false; // 未配置时自动隐藏
+---
+
+{enabled && (
+  <div class="giscus-wrapper">
+    <script
+      src="https://giscus.app/client.js"
+      data-repo={giscus.repo}
+      data-repo-id={giscus.repoId}
+      data-category={giscus.category}
+      data-category-id={giscus.categoryId}
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </div>
+)}
+
+<style>
+  .giscus-wrapper {
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: 2em auto 0;
+  }
+</style>

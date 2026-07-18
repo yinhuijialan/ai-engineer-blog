@@ -1,0 +1,22 @@
+---
+// Pagefind 站内搜索组件（纯前端、免费、无需后端）
+//
+// 启用步骤：
+// 1. 依赖已加入 devDependencies：pagefind
+// 2. 构建时带索引请用：npm run build:search  （= astro build && pagefind --site dist）
+// 3. 在本页面或任意位置引入 <Search /> 即可
+// 注意：/pagefind/pagefind-ui.js 与 .css 只有在执行过 build:search 之后才会生成，
+//       开发模式（astro dev）下不会存在，属正常现象。
+---
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<div id="search" class="search-box"></div>
+<script is:inline src="/pagefind/pagefind-ui.js" onload="new PagefindUI({ element: '#search', showSubResults: true })"></script>
+
+<style>
+  .search-box {
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: 2em auto;
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Search from '../components/Search.astro';
+---
+
+<html lang="zh-CN">
+  <head>
+    <BaseHead title="搜索" description="站内全文搜索" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="prose">
+        <h1>站内搜索</h1>
+        <p>输入关键词检索全站文章（需先执行 <code>npm run build:search</code> 生成索引）。</p>
+        <Search />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .prose {
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 1em;
+    color: rgb(var(--gray-dark));
+  }
+</style>

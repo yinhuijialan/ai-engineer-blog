@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const latest = posts.slice(0, 5);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.hero {
+				text-align: center;
+				padding: 2em 0 1em;
+			}
+			.hero h1 {
+				font-size: 2.8em;
+				margin-bottom: 0.3em;
+			}
+			.hero p {
+				font-size: 1.2em;
+				color: rgb(var(--gray));
+				max-width: 36em;
+				margin: 0 auto;
+			}
+			.hero .cta {
+				margin-top: 1.5em;
+			}
+			.hero .cta a {
+				display: inline-block;
+				margin: 0 0.4em;
+				padding: 0.5em 1.2em;
+				border: 1px solid var(--accent);
+				border-radius: 999px;
+				text-decoration: none;
+				color: var(--accent);
+				transition: 0.2s ease;
+			}
+			.hero .cta a:hover {
+				background: var(--accent);
+				color: #fff;
+			}
+			.latest h2 {
+				font-size: 1.4em;
+				margin: 2em 0 0.8em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				padding-bottom: 0.3em;
+			}
+			.latest ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.latest li {
+				padding: 0.7em 0;
+				border-bottom: 1px dashed rgb(var(--gray-light));
+			}
+			.latest a {
+				text-decoration: none;
+				color: rgb(var(--black));
+				font-size: 1.1em;
+			}
+			.latest a:hover {
+				color: var(--accent);
+			}
+			.latest .date {
+				color: rgb(var(--gray));
+				font-size: 0.85em;
+				margin-left: 0.6em;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<h1>{SITE_TITLE}</h1>
+				<p>{SITE_DESCRIPTION}</p>
+				<div class="cta">
+					<a href="/blog">浏览文章</a>
+					<a href="/about">关于我</a>
+				</div>
+			</section>
+
+			<section class="latest">
+				<h2>最新文章</h2>
+				<ul>
+					{
+						latest.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									{post.data.title}
+									<span class="date">
+										<FormattedDate date={post.data.pubDate} />
+									</span>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
