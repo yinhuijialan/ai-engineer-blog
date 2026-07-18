@@ -1,0 +1,20 @@
+{
+  "name": "ai-engineer-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "build:search": "astro build && pagefind --site dist"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.3",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.1.0",
+    "pagefind": "^1.4.0",
+    "sharp": "^0.35.0"
+  }
+}
